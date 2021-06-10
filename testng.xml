@@ -1,0 +1,17 @@
+<suite name="Suite-3" verbose="1">
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+    <test name="all-packages">
+        <classes>
+            <class name = "ProductsTest"/>
+            <class name = "CommentTest"/>
+            <class name = "DiscoveryTest"/>
+            <class name = "EditorScreenTest"/>
+            <class name = "HashtagTest"/>
+            <class name = "InstagramTest"/>
+            <class name = "CanvasTest"/>
+        </classes>
+
+    </test>
+</suite>
