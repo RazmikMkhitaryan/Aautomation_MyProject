@@ -27,5 +27,9 @@ public class DriverSetup {
         return driver;
     }
 
+    public static void quit() {
+        getDriver().close();
+        driver = null;
+    }
 
 }
