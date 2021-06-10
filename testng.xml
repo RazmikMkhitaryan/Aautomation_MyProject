@@ -4,6 +4,7 @@
     </listeners>
     <test name="all-packages">
         <classes>
+
             <class name = "ProductsTest"/>
             <class name = "CommentTest"/>
             <class name = "DiscoveryTest"/>
@@ -11,6 +12,7 @@
             <class name = "HashtagTest"/>
             <class name = "InstagramTest"/>
             <class name = "CanvasTest"/>
+
         </classes>
     </test>
 </suite>
