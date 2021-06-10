@@ -12,6 +12,5 @@
             <class name = "InstagramTest"/>
             <class name = "CanvasTest"/>
         </classes>
-
     </test>
 </suite>
