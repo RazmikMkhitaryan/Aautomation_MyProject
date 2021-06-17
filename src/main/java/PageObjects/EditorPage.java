@@ -1,11 +1,10 @@
 package PageObjects;
 
-import Helpers.WaitHelper;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static setup.DriverSetup.getDriver;
 
 public class EditorPage extends BasePage {
 
@@ -19,15 +18,26 @@ public class EditorPage extends BasePage {
 
     public EditorPage() {
         open(getUrl());
-        PageFactory.initElements(getDriver(),this);
+        PageFactory.initElements(driver, this);
 
     }
 
-    public EditorPage init(){
-        PageFactory.initElements(getDriver(),this);
+    public EditorPage init() {
+        PageFactory.initElements(driver, this);
 
         return this;
     }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
+    }
+
 
     @Override
     public String getUrl() {
@@ -37,17 +47,17 @@ public class EditorPage extends BasePage {
     public void clickOnDownload() {
         init();
         try {
-           // Helpers.WaitHelper.getInstance().waitForElementDisplay(exportButton);
+            // Helpers.WaitHelper.getInstance().waitForElementDisplay(exportButton);
             click(exportButton);
-          //  Helpers.WaitHelper.getInstance().waitForElementDisplay(download);
+            //  Helpers.WaitHelper.getInstance().waitForElementDisplay(download);
             init();
             click(download);
 
         } catch (Exception e) {
             init();
-            WaitHelper.getInstance().waitForElementDisplay(downloadButton);
+            // WaitHelper.getInstance().waitForElementDisplay(downloadButton);
             click(downloadButton);
-            WaitHelper.getInstance().waitForElementDisplay(download);
+            //  WaitHelper.getInstance().waitForElementDisplay(download);
             init();
             click(download);
         }

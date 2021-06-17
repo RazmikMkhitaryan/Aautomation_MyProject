@@ -1,11 +1,9 @@
 package PageObjects;
 
-import Helpers.WaitHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static setup.DriverSetup.getDriver;
 
 public class BatchEditor extends BasePage {
     @FindBy(css = "[class='toolbarItem-0-2-115']")
@@ -13,11 +11,21 @@ public class BatchEditor extends BasePage {
 
     public BatchEditor() {
         open(getUrl());
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        isDisplayed(download);
     }
 
     public BatchEditor init() {
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
         return this;
     }
 
@@ -35,7 +43,7 @@ public class BatchEditor extends BasePage {
         }
         changeTab(1);
         init();
-        WaitHelper.getInstance().waitForElementDisplay(download);
+       // WaitHelper.getInstance().waitForElementDisplay(download);
         click(download);
     }
 }

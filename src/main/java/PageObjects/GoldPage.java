@@ -9,19 +9,27 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
 
-import static setup.DriverSetup.getDriver;
-
 public class GoldPage extends BasePage{
     @FindBy(css = "[class='c0232']")
     private WebElement carousel;
 
     public GoldPage() {
         open(getUrl());
-        PageFactory.initElements(getDriver(),this);
+        PageFactory.initElements(driver,this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
     }
 
     public GoldPage init(){
-        PageFactory.initElements(getDriver(),this);
+        PageFactory.initElements(driver,this);
         return this;
     }
 
@@ -32,9 +40,9 @@ public class GoldPage extends BasePage{
 
     public void swipeCarousel() {
         init();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", carousel);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", carousel);
 
-        Actions action = new Actions(getDriver());
+        Actions action = new Actions(driver);
 
         action.moveToElement(carousel).clickAndHold(carousel)
                 .moveByOffset(-100, 0).release().build();

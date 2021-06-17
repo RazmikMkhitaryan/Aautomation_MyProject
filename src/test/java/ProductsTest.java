@@ -12,7 +12,7 @@ public class ProductsTest extends TestBase {
      * This test is checking all products count
      */
     @Test(priority = 2)
-    public void AllProductsTest() {
+    public void AllProductsTest()  {
         CreatePage createPage = new CreatePage();
         createPage.openCreatePage();
         createPage.goToProducts();

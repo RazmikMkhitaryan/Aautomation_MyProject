@@ -3,17 +3,21 @@ import PageObjects.ImageBrowserPage;
 import PageObjects.LoginPage;
 import com.google.gson.JsonObject;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import setup.DriverHelper;
 
 import java.io.IOException;
-import static setup.DriverSetup.getDriver;
 
-public class CommentTest extends TestBase {
+
+public class CommentTest  {
     private String key;
     private String key2 = "1cd61327-24ed-4874-a557-a658f36936e2";
     private String myImage = "354400546054201";
     private String sid;
+    private WebDriver driver = DriverHelper.get().getDriver();
+
 
     @BeforeTest
     public void setup() throws IOException, InterruptedException {
@@ -22,8 +26,8 @@ public class CommentTest extends TestBase {
         LoginPage loginPage = new LoginPage();
 
         Cookie cookie = new Cookie("user_key", key);
-        getDriver().manage().addCookie(cookie);
-        getDriver().navigate().refresh();
+        driver.manage().addCookie(cookie);
+        driver.navigate().refresh();
 
 
     }
@@ -38,8 +42,8 @@ public class CommentTest extends TestBase {
         //    key2 = user.get("response").getAsJsonObject().get("key").getAsString();
         LoginPage loginPage = new LoginPage();
         Cookie cookie = new Cookie("user_key", key2);
-        getDriver().manage().addCookie(cookie);
-        getDriver().navigate().refresh();
+        driver.manage().addCookie(cookie);
+        driver.navigate().refresh();
 
         // Helpers.ApiHelper.addComment(key2, image.get("id").getAsString());
         ApiHelper.addComment(key2, myImage);

@@ -9,13 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static setup.DriverSetup.getDriver;
 
 public class AllProductsPage extends BasePage{
+
     private By allProductsInPageOne1 = By.cssSelector("[class='GridList__column___4RviC']");
-//    private By invitationTamplate = By.cssSelector("[data-test='invitation-templates']");
-//    private By nextPageButton = By.cssSelector("[data-test='page-next-arrow']");
-//    private By pagesNumber = By.cssSelector("[class ='Pagination__controlInput___2rZXA']");
 
     @FindBy(css = "[class='GridList__column___4RviC']")
     private WebElement allProductsInPageOne;
@@ -29,11 +26,21 @@ public class AllProductsPage extends BasePage{
 
     public AllProductsPage() {
         open(getUrl());
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
     }
 
     public AllProductsPage init() {
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
         return this;
     }
 
@@ -48,7 +55,7 @@ public class AllProductsPage extends BasePage{
 
     public void scrollToElement() {
         init();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);",nextPageButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",nextPageButton);
 
     }
 

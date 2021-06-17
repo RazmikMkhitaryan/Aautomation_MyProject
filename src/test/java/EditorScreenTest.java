@@ -3,13 +3,17 @@ import PageObjects.CreatePage;
 import PageObjects.EditorPage;
 import PageObjects.UserPage;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+import setup.DriverHelper;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static setup.DriverSetup.getDriver;
+
 
 public class EditorScreenTest extends TestBase {
+    private WebDriver driver = DriverHelper.get().getDriver();
+
     /**
      * this test is liking user's image , if it was liked method did unlike and print in log
      */
@@ -53,11 +57,11 @@ public class EditorScreenTest extends TestBase {
 
 
     public void login() {
-        getDriver().manage().addCookie(new Cookie("user_key", "f783a943-e4c0-4b5d-93e6-e838aebb54c2"));
-        getDriver().manage().addCookie(new Cookie("sid", "s%3A6wvimOnDxU4w6K0q-QS8ARWvpMUIk-Bf.XUYEwXpzY2FYeqQKf%2F4WrFvC0tz0NkRiKR8OuJcf8OQ"));
-        getDriver().manage().addCookie(new Cookie("we-editor-first-open", "true"));
-        getDriver().manage().addCookie(new Cookie("OptanonAlertBoxClosed", "some_value"));
-        getDriver().navigate().refresh();
+        driver.manage().addCookie(new Cookie("user_key", "f783a943-e4c0-4b5d-93e6-e838aebb54c2"));
+        driver.manage().addCookie(new Cookie("sid", "s%3A6wvimOnDxU4w6K0q-QS8ARWvpMUIk-Bf.XUYEwXpzY2FYeqQKf%2F4WrFvC0tz0NkRiKR8OuJcf8OQ"));
+        driver.manage().addCookie(new Cookie("we-editor-first-open", "true"));
+        driver.manage().addCookie(new Cookie("OptanonAlertBoxClosed", "some_value"));
+        driver.navigate().refresh();
     }
 
 }

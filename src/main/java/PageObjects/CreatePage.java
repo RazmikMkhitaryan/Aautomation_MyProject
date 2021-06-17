@@ -1,18 +1,19 @@
 package PageObjects;
 
-import Helpers.WaitHelper;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import setup.DriverHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static setup.DriverSetup.getDriver;
-
 public class CreatePage extends BasePage {
+    private WebDriver driver = DriverHelper.get().getDriver();
+
     @FindBy(css = "[data-test='headerNavigation-navigationListItem-Products']")
     private WebElement products;
     @FindBy(css = "[href='/photo-editing-tools']")
@@ -33,11 +34,21 @@ public class CreatePage extends BasePage {
 
     public CreatePage() {
         open(getUrl());
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        isDisplayed(instagramStory);
     }
 
     public CreatePage init() {
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
         return this;
     }
 
@@ -64,10 +75,10 @@ public class CreatePage extends BasePage {
     }
 
     public void goToProducts() {
-        Actions actions = new Actions(getDriver());
+        Actions actions = new Actions(driver);
         actions.moveToElement(products).build().perform();
         init();
-        WaitHelper.getInstance().waitForElementDisplay(seeAll);
+        //WaitHelper.getInstance().waitForElementDisplay(seeAll);
         click(seeAll);
     }
 
@@ -82,7 +93,7 @@ public class CreatePage extends BasePage {
     }
 
     public int getItemsCount() {
-       // Helpers.WaitHelper.getInstance().waitForElementDisplay(editorItems.get(0));
+        // Helpers.WaitHelper.getInstance().waitForElementDisplay(editorItems.get(0));
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
@@ -94,8 +105,8 @@ public class CreatePage extends BasePage {
 
     public void clickFitIcon() {
         init();
-            WaitHelper.getInstance().waitForElementDisplay(fitIconItem);
-            click(fitIconItem);
-        }
+        //WaitHelper.getInstance().waitForElementDisplay(fitIconItem);
+        click(fitIconItem);
     }
+}
 

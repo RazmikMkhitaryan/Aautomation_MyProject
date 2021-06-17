@@ -1,13 +1,11 @@
 package PageObjects;
 
-import Helpers.WaitHelper;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
-
-import static setup.DriverSetup.getDriver;
 
 public class UserPage extends BasePage {
     private By imagesGrid = By.cssSelector("[data-page-source='user_profile']");
@@ -18,6 +16,19 @@ public class UserPage extends BasePage {
     private By button = By.cssSelector(".c-get-the-app-popup.js-prevent-default-event.primary-big-btn");
     private By qrCode = By.id("qrcode");
 
+    public UserPage() {
+        open(getUrl());
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        isDisplayed(likeButton);
+    }
 
     @Override
     public String getUrl() {
@@ -29,14 +40,14 @@ public class UserPage extends BasePage {
     }
 
     public void openFirtsImage() {
-        WaitHelper.getInstance().waitForElementDisplay(imagesGrid);
+        // WaitHelper.getInstance().waitForElementDisplay(imagesGrid);
         List<WebElement> all = findAll(imagesGrid);
         click(all.get(0));
     }
 
 
     public boolean like() {
-        WaitHelper.getInstance().waitForElementDisplay(likeButton);
+        // WaitHelper.getInstance().waitForElementDisplay(likeButton);
         if (find(likeButton).getAttribute("class").contains("active")) {
             System.out.println("Image was liked before ------ i did unlike ");
         } else {
@@ -51,26 +62,26 @@ public class UserPage extends BasePage {
     }
 
     public void goToDiscovery() {
-        WaitHelper.getInstance().waitForElementDisplay(discovery);
-        WebElement element = getDriver().findElement(discovery);
-        Actions actions = new Actions(getDriver());
+        //  WaitHelper.getInstance().waitForElementDisplay(discovery);
+        WebElement element = driver.findElement(discovery);
+        Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
 
     public void clickOnChallanges() {
-        WaitHelper.getInstance().waitForBeClickable(challenges);
+        // WaitHelper.getInstance().waitForBeClickable(challenges);
         click(challenges);
     }
 
     public void selectChallenge() {
-        WaitHelper.getInstance().waitForElementDisplay(gridItems);
-        List<WebElement> element = getDriver().findElements(gridItems);
+        //  WaitHelper.getInstance().waitForElementDisplay(gridItems);
+        List<WebElement> element = driver.findElements(gridItems);
 
-        click(element.get(element.size() - 1));
+        click(element.get(element.size()));
     }
 
     public void clickOnButton() {
-        WaitHelper.getInstance().waitForElementDisplay(button);
+        //  WaitHelper.getInstance().waitForElementDisplay(button);
         click(button);
     }
 

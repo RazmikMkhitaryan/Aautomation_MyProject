@@ -5,7 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static setup.DriverSetup.getDriver;
+
 
 public class CanvasPage extends BasePage {
     @FindBy(css = "[data-test='canvas-container'] .konvajs-content")
@@ -17,12 +17,22 @@ public class CanvasPage extends BasePage {
 
     public CanvasPage() {
         open(getUrl());
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        isDisplayed(canvas);
     }
 
 
     public CanvasPage init() {
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(driver, this);
         return this;
     }
 
@@ -34,7 +44,7 @@ public class CanvasPage extends BasePage {
 
     public CanvasPage rightClick() {
         init();
-        Actions action = new Actions(getDriver());
+        Actions action = new Actions(driver);
         action.contextClick(canvas).perform();
         return this;
     }

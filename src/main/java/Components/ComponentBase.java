@@ -1,51 +1,44 @@
-package PageObjects;
+package Components;
 
+import PageObjects.BasePage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.SlowLoadableComponent;
 import setup.DriverHelper;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
+public abstract class ComponentBase  <T extends SlowLoadableComponent<T>> extends SlowLoadableComponent<T> {
 
-public abstract class BasePage <T extends LoadableComponent<T>> extends LoadableComponent<T> {
     private static final Logger LOGGER = Logger.getLogger(BasePage.class);
     protected WebDriver driver;
-    public static final String BASE_URL="http://picsartstage2.com";
-//    {
-//        String url = System.getProperty("selenium.url", "http://picsartstage2.com");
-//
-//    }
 
-    public BasePage() {
-
-        this.driver = DriverHelper.get().getDriver();
+    public ComponentBase(Clock clock,int timeOutInSeconds, WebDriver driver) {
+        super(clock,timeOutInSeconds);
+        this.driver = driver;
     }
 
-    public abstract String getUrl();
-
-    public void open(String url) {
-        LOGGER.info("OPening url->" + url);
-        driver.get(url);
+    public boolean isDisplayed(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
-
     public WebElement find(By location) {
         LOGGER.info("Finding  element->" + location.toString());
 
         return driver.findElement(location);
     }
-//    public WebElement find(WebElement element) {
-//        LOGGER.info("Finding  element->" + element.toString());
-//
-//        return driver.findElement((By) element);
-//    }
 
     public void type(By location, String text) {
-       LOGGER.info("Typing element->" + text);
+        LOGGER.info("Typing element->" + text);
         find(location).sendKeys(text);
     }
 
@@ -63,13 +56,6 @@ public abstract class BasePage <T extends LoadableComponent<T>> extends Loadable
         element.click();
     }
 
-    public boolean isDisplayed(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
 
     public boolean isDisplayed(By location) {
         try {
@@ -88,7 +74,6 @@ public abstract class BasePage <T extends LoadableComponent<T>> extends Loadable
     public List<WebElement> findAll(By location) {
         return driver.findElements(location);
     }
-
 
 
 }

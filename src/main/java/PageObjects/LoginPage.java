@@ -3,29 +3,60 @@ package PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static setup.DriverSetup.getDriver;
+import setup.DriverHelper;
+
 
 public class LoginPage extends BasePage {
-    private By usernameFieldLocation = By.name("username");
-    private By passwordFieldLocation = By.name("password");
-    private By loginButtonLocation = By.cssSelector("[data-test='headerAuth-signInBtn pa-uiLib-headerAuth-authBtn']");
-    private By signInButtonLocation = By.cssSelector("[class='pa-uiLib-authentication-btn primary pa-uiLib-authentication-signIn']");
-    private By avatarImageLocation = By.cssSelector("[class='pa-uiLib-headerProfileInfo-profileInfo']");
-    private By instagramIcon = By.cssSelector("[class='socialSizeDescription-0-2-722']");
-    private By instagramRatio = By.cssSelector("[class='pwCreateDesignContainer-0-2-719']");
+    @FindBy(name = "username")
+    private WebElement usernameFieldLocation;
+    @FindBy(name = "password")
+    private WebElement passwordFieldLocation;
+    @FindBy(css = "[data-test='headerAuth-signInBtn pa-uiLib-headerAuth-authBtn']")
+    private WebElement loginButtonLocation;
+    @FindBy(css = "[class='pa-uiLib-authentication-btn primary pa-uiLib-authentication-signIn']")
+    private WebElement signInButtonLocation;
+    @FindBy(css = "[class='pa-uiLib-headerProfileInfo-profileInfo']")
+    private WebElement avatarImageLocation;
+    @FindBy(css = "[class='socialSizeDescription-0-2-722']")
+    private WebElement instagramIcon;
 
+    @FindBy(css = "[class='pwCreateDesignContainer-0-2-719']")
+    private WebElement instagramRatio;
 
     public LoginPage() {
-        driver.get("https://picsartstage2.com");
+        open(getUrl());
+        PageFactory.initElements(DriverHelper.get().driver, this);
+    }
+
+    public void init() {
+        PageFactory.initElements(driver, this);
 
     }
 
+    @Override
+    public String getUrl() {
+        return BasePage.BASE_URL;
+    }
+
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+        isDisplayed(usernameFieldLocation);
+    }
+
     public void clickLoginButton() {
-        click(find(loginButtonLocation));
-        new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(usernameFieldLocation));
+        click(loginButtonLocation);
+//        new WebDriverWait(driver, 20)
+//                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(usernameFieldLocation));
     }
 
     public void typeUsername(String username) {
@@ -43,30 +74,20 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isAvatarDisplayed() {
-        WebElement avatarIcon = new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.visibilityOfElementLocated((avatarImageLocation)));
-        return find(avatarImageLocation).isDisplayed();
+
+        return isDisplayed(avatarImageLocation);
 
     }
 
     public boolean isUserLoggedIn() {
-        WebElement avatarIcon = new WebDriverWait(driver, 40)
-                .until(ExpectedConditions.visibilityOfElementLocated((avatarImageLocation)));
-        return avatarIcon.isDisplayed();
-    }
-
-
-    @Override
-    public String getUrl() {
-        return BasePage.BASE_URL;
+        return isDisplayed(avatarImageLocation);
     }
 
 
     public void clickInstagram() {
-        new WebDriverWait(getDriver(), 20)
-                .until(ExpectedConditions.visibilityOfElementLocated((instagramRatio)));
-        Actions actions = new Actions(getDriver());
-        actions.moveToElement(find(instagramIcon)).click().build().perform();
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(instagramIcon).click().build().perform();
     }
 
 
