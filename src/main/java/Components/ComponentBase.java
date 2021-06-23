@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.SlowLoadableComponent;
 import setup.DriverHelper;
 
@@ -14,14 +13,14 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ComponentBase  <T extends SlowLoadableComponent<T>> extends SlowLoadableComponent<T> {
+public abstract class ComponentBase<T extends SlowLoadableComponent<T>> extends SlowLoadableComponent<T> {
 
     private static final Logger LOGGER = Logger.getLogger(BasePage.class);
     protected WebDriver driver;
 
-    public ComponentBase(Clock clock,int timeOutInSeconds, WebDriver driver) {
-        super(clock,timeOutInSeconds);
-        this.driver = driver;
+    public ComponentBase(Clock clock, int timeOutInSeconds) {
+        super(clock, timeOutInSeconds);
+        this.driver = DriverHelper.get().getDriver();
     }
 
     public boolean isDisplayed(WebElement element) {
@@ -31,6 +30,7 @@ public abstract class ComponentBase  <T extends SlowLoadableComponent<T>> extend
             return false;
         }
     }
+
     public WebElement find(By location) {
         LOGGER.info("Finding  element->" + location.toString());
 

@@ -48,7 +48,8 @@ public class ProductsTest extends TestBase {
         pagesCount = pagesCount + allProductsPage.goToNextPage(pagesCount);
         allProductsPage.scrollToElement();
         pagesCount = pagesCount + allProductsPage.goToNextPage(pagesCount);
-
+        allProductsPage.scrollToElement();
+        pagesCount = pagesCount + allProductsPage.goToNextPage(pagesCount);
         assertEquals(pagesCount, allProductsPage.numberOfPage(), "Pages count is not true");
 
     }

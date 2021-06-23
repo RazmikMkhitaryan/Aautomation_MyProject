@@ -1,14 +1,11 @@
 package Components;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.time.Clock;
 
 public class SearchComponent extends ComponentBase {
@@ -19,8 +16,8 @@ public class SearchComponent extends ComponentBase {
     private WebElement search;
 
 
-    public SearchComponent(Clock clock, int timeOutInSeconds, WebDriver driver) {
-        super(clock, timeOutInSeconds, driver);
+    public SearchComponent(Clock clock, int timeOutInSeconds) {
+        super(clock, timeOutInSeconds);
         PageFactory.initElements(driver, this);
     }
 
@@ -42,7 +39,7 @@ public class SearchComponent extends ComponentBase {
 
     public void searchSomething() throws AWTException {
 
-        super.type(search, "hello"+ Keys.ENTER) ;
+        super.type(search, "hello" + Keys.ENTER);
 
 
     }

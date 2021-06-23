@@ -17,15 +17,15 @@ import static org.testng.Assert.assertTrue;
 public class HashtagTest extends TestBase {
     private String key;
     private String imageId;
-    private WebDriver driver = DriverHelper.get().getDriver();
 
 
     @BeforeMethod
     public void setup() throws IOException, InterruptedException {
+
         JsonObject user = ApiHelper.createUser();
         key = user.get("response").getAsJsonObject().get("key").getAsString();
         LoginPage loginPage = new LoginPage();
-
+        WebDriver driver = DriverHelper.get().getDriver();
         Cookie cookie = new Cookie("user_key", key);
         driver.manage().addCookie(cookie);
         driver.navigate().refresh();
@@ -40,7 +40,7 @@ public class HashtagTest extends TestBase {
     @AfterMethod
     public void tearDown() throws IOException {
         ApiHelper.deleteUser(key);
-        driver.navigate().refresh();
+        DriverHelper.get().getDriver().navigate().refresh();
     }
 
     /**
@@ -49,7 +49,7 @@ public class HashtagTest extends TestBase {
     @Test
     public void addHashtag() throws IOException, InterruptedException {
         ApiHelper.addHashtag(key, imageId, ImageBrowserPage.HASHTAG);
-        ImageBrowserPage imageBrowserPage = new ImageBrowserPage(imageId);
+        ImageBrowserPage imageBrowserPage = (ImageBrowserPage) new ImageBrowserPage(imageId);
         assertTrue(imageBrowserPage.isHashtagAdded(), "hashtag was not added");
     }
 }

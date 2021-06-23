@@ -1,18 +1,18 @@
 package PageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import setup.DriverHelper;
 
 public class ImageBrowserPage extends BasePage {
     public static final String HASHTAG = "idid";
-    @FindBy(css = "[href='/hashtag/\"+HASHTAG+\"']")
-    private By photoHashtag ;
+    @FindBy(css = "[href='/hashtag/idid']")
+    private WebElement photoHashtag;
 
     public ImageBrowserPage() {
-       // open(getUrl());
-        PageFactory.initElements(DriverHelper.get().driver, this);
+        // open(getUrl());
+        PageFactory.initElements(driver, this);
     }
 
     public void init() {
@@ -39,8 +39,9 @@ public class ImageBrowserPage extends BasePage {
         return null;
     }
 
-    public  boolean isHashtagAdded(){
-            return isDisplayed(photoHashtag);
+    public boolean isHashtagAdded() {
+        init();
+        return isDisplayed(photoHashtag);
     }
 
 }

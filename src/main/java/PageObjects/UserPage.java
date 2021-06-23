@@ -1,23 +1,40 @@
 package PageObjects;
 
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class UserPage extends BasePage {
-    private By imagesGrid = By.cssSelector("[data-page-source='user_profile']");
-    private By likeButton = By.cssSelector("[class*='c-like-button like']");
-    private By challenges = By.linkText("Challenges");
-    private By discovery = By.cssSelector("[data-test='headerNavigation-navigationListItem-Discover']");
-    private By gridItems = By.cssSelector("[class*='card card']");
-    private By button = By.cssSelector(".c-get-the-app-popup.js-prevent-default-event.primary-big-btn");
-    private By qrCode = By.id("qrcode");
+    @FindBy(css = "[data-page-source='user_profile'")
+    private List<WebElement> imagesGrid;
+
+    @FindBy(css = "[class*='c-like-button like']")
+    private WebElement likeButton;
+    @FindBy(linkText = "Challenges")
+    private WebElement challenges;
+    @FindBy(css = "[data-test='headerNavigation-navigationListItem-Discover']")
+    private WebElement discovery;
+
+    //@FindBy(css = "[class*='card card']")
+    @FindBy(css = "[class='card card-big']")
+    private WebElement gridItems;
+    @FindBy(css = ".c-get-the-app-popup.js-prevent-default-event.primary-big-btn")
+    private WebElement button;
+    @FindBy(id = "qrcode")
+    private WebElement qrCode;
 
     public UserPage() {
         open(getUrl());
+        PageFactory.initElements(driver, this);
+    }
+
+    public void init() {
+        PageFactory.initElements(driver, this);
+
     }
 
     @Override
@@ -40,15 +57,14 @@ public class UserPage extends BasePage {
     }
 
     public void openFirtsImage() {
-        // WaitHelper.getInstance().waitForElementDisplay(imagesGrid);
-        List<WebElement> all = findAll(imagesGrid);
+        List<WebElement> all = imagesGrid;
         click(all.get(0));
     }
 
 
     public boolean like() {
-        // WaitHelper.getInstance().waitForElementDisplay(likeButton);
-        if (find(likeButton).getAttribute("class").contains("active")) {
+        init();
+        if ((likeButton).getAttribute("class").contains("active")) {
             System.out.println("Image was liked before ------ i did unlike ");
         } else {
             System.out.println("I like this photo");
@@ -62,34 +78,16 @@ public class UserPage extends BasePage {
     }
 
     public void goToDiscovery() {
-        //  WaitHelper.getInstance().waitForElementDisplay(discovery);
-        WebElement element = driver.findElement(discovery);
+        init();
         Actions actions = new Actions(driver);
-        actions.moveToElement(element).build().perform();
+        actions.moveToElement(discovery).build().perform();
     }
 
     public void clickOnChallanges() {
-        // WaitHelper.getInstance().waitForBeClickable(challenges);
+        init();
         click(challenges);
     }
 
-    public void selectChallenge() {
-        //  WaitHelper.getInstance().waitForElementDisplay(gridItems);
-        List<WebElement> element = driver.findElements(gridItems);
 
-        click(element.get(element.size()));
-    }
-
-    public void clickOnButton() {
-        //  WaitHelper.getInstance().waitForElementDisplay(button);
-        click(button);
-    }
-
-    public boolean isVisibleQrCode() {
-        if (find(qrCode).isDisplayed()) {
-            return true;
-        }
-        return false;
-    }
 
 }

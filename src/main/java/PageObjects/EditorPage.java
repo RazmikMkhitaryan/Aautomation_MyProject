@@ -2,28 +2,31 @@ package PageObjects;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import setup.DriverHelper;
 
 
 public class EditorPage extends BasePage {
 
-    @FindBy(css = "[id='download-button']")
-    private By exportButton;
+    @FindBy(id = "download-button")
+    private WebElement exportButton;
     @FindBy(css = "[data-test='downloaded-button']")
-    private By download;
+    private WebElement download;
     @FindBy(linkText = "Download")
-    private By downloadButton;
-
+    private WebElement downloadButton;
+    @FindBy(css = ".canvasContainer-0-2-1042")
+    private WebElement canvas;
 
     public EditorPage() {
-        open(getUrl());
-        PageFactory.initElements(driver, this);
+
+        PageFactory.initElements(DriverHelper.get().getDriver(), this);
 
     }
 
     public EditorPage init() {
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverHelper.get().getDriver(), this);
 
         return this;
     }
@@ -35,7 +38,8 @@ public class EditorPage extends BasePage {
 
     @Override
     protected void isLoaded() throws Error {
-
+        isClickable(exportButton);
+        isDisplayed(canvas);
     }
 
 
@@ -45,19 +49,21 @@ public class EditorPage extends BasePage {
     }
 
     public void clickOnDownload() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         init();
         try {
-            // Helpers.WaitHelper.getInstance().waitForElementDisplay(exportButton);
             click(exportButton);
-            //  Helpers.WaitHelper.getInstance().waitForElementDisplay(download);
             init();
             click(download);
 
         } catch (Exception e) {
             init();
-            // WaitHelper.getInstance().waitForElementDisplay(downloadButton);
             click(downloadButton);
-            //  WaitHelper.getInstance().waitForElementDisplay(download);
             init();
             click(download);
         }

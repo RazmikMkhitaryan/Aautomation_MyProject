@@ -1,21 +1,18 @@
 package PageObjects;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
-
-public class GoldPage extends BasePage{
-    @FindBy(css = "[class='c0232']")
+public class GoldPage extends BasePage {
+    @FindBy(css = ".carousel-overlay-cover")
     private WebElement carousel;
 
     public GoldPage() {
         open(getUrl());
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -28,14 +25,14 @@ public class GoldPage extends BasePage{
 
     }
 
-    public GoldPage init(){
-        PageFactory.initElements(driver,this);
+    public GoldPage init() {
+        PageFactory.initElements(driver, this);
         return this;
     }
 
     @Override
     public String getUrl() {
-        return BASE_URL+"/gold";
+        return BASE_URL + "/gold";
     }
 
     public void swipeCarousel() {

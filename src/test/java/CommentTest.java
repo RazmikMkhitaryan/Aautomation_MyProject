@@ -11,7 +11,7 @@ import setup.DriverHelper;
 import java.io.IOException;
 
 
-public class CommentTest  {
+public class CommentTest extends TestBase {
     private String key;
     private String key2 = "1cd61327-24ed-4874-a557-a658f36936e2";
     private String myImage = "354400546054201";

@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BasePage <T extends LoadableComponent<T>> extends LoadableComponent<T> {
+public abstract class BasePage<T extends LoadableComponent<T>> extends LoadableComponent<T> {
     private static final Logger LOGGER = Logger.getLogger(BasePage.class);
     protected WebDriver driver;
-    public static final String BASE_URL="http://picsartstage2.com";
+    public static final String BASE_URL = "http://picsartstage2.com";
 //    {
 //        String url = System.getProperty("selenium.url", "http://picsartstage2.com");
 //
@@ -45,7 +45,7 @@ public abstract class BasePage <T extends LoadableComponent<T>> extends Loadable
 //    }
 
     public void type(By location, String text) {
-       LOGGER.info("Typing element->" + text);
+        LOGGER.info("Typing element->" + text);
         find(location).sendKeys(text);
     }
 
@@ -79,6 +79,10 @@ public abstract class BasePage <T extends LoadableComponent<T>> extends Loadable
         }
     }
 
+    public boolean isClickable(WebElement element){
+      return   isClickable(element);
+    }
+
     public void changeTab(int tabIndex) {
         List<String> windowHandles = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(windowHandles.get(tabIndex));
@@ -88,7 +92,6 @@ public abstract class BasePage <T extends LoadableComponent<T>> extends Loadable
     public List<WebElement> findAll(By location) {
         return driver.findElements(location);
     }
-
 
 
 }

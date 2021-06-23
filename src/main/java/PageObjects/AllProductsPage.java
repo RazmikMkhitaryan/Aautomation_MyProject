@@ -6,11 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import java.util.List;
 
 
-public class AllProductsPage extends BasePage{
+public class AllProductsPage extends BasePage {
 
     private By allProductsInPageOne1 = By.cssSelector("[class='GridList__column___4RviC']");
 
@@ -55,7 +54,7 @@ public class AllProductsPage extends BasePage{
 
     public void scrollToElement() {
         init();
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",nextPageButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", nextPageButton);
 
     }
 

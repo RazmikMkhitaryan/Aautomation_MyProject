@@ -1,11 +1,9 @@
 package PageObjects;
 
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import setup.DriverHelper;
 
 public class HomePage extends BasePage {
     @FindBy(css = "[data-test='headerNavigation-navigationListItem-Create']")
@@ -18,7 +16,7 @@ public class HomePage extends BasePage {
 
     public HomePage() {
         open(getUrl());
-        PageFactory.initElements(DriverHelper.get().driver, this);
+        PageFactory.initElements(driver, this);
     }
 
     public void init() {

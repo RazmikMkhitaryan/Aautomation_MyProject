@@ -1,11 +1,11 @@
 package PageObjects;
 
-public class SearchedPage extends BasePage{
+public class SearchedPage extends BasePage {
 
 
     @Override
     public String getUrl() {
-        return BASE_URL+"/create/search?q=hello";
+        return BASE_URL + "/create/search?q=hello";
     }
 
     @Override
@@ -18,7 +18,7 @@ public class SearchedPage extends BasePage{
 
     }
 
-    public  String getCurrentUrl(){
-       return driver.getCurrentUrl().toString();
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl().toString();
     }
 }

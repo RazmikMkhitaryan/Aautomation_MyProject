@@ -35,9 +35,14 @@ public class EditorScreenTest extends TestBase {
         CreatePage createPage = new CreatePage();
         createPage.openCreatePage();
         createPage.uploatImage();
-
-        EditorPage editorPage = new EditorPage();
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        EditorPage editorPage = (EditorPage) new EditorPage().get();
         editorPage.clickOnDownload();
+
     }
 
     /**
