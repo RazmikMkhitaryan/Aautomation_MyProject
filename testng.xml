@@ -2,14 +2,9 @@
     <listeners>
         <listener class-name="listeners.TestListener"/>
     </listeners>
-    <test name="all-packages" parallel="methods" >
+    <test name="all-packages" parallel="methods" thread-count="5">
         <classes>
-            <class name="CarouselTest"/>
-            <class name="CanvasTest"/>
-            <class name="CommentTest"/>
-            <class name="InstagramTest"/>
-            <class name="ChallengeTest"/>
-            <class name="EditorScreenTest"/>
+
             <class name="HashtagTest"/>
             <class name="ProductsTest"/>
             <class name="SearchTest"/>
